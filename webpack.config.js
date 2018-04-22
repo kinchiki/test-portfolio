@@ -34,7 +34,7 @@ module.exports = {
             },
           },
           {
-            loader: 'postcss-loder',
+            loader: 'postcss-loader',
             options: {
               sourceMap: enabledSourceMap,
               plugins: [
@@ -43,7 +43,7 @@ module.exports = {
             },
           },
           {
-            loader: 'sass-loder',
+            loader: 'sass-loader',
             options: { sourceMap: enabledSourceMap, }
           },
         ],
