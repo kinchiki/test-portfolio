@@ -1,6 +1,8 @@
 const path = require('path')
-const MODE = 'development';
-const enabledSourceMap = (MODE === 'development');
+const distPath = path.resolve(__dirname, 'dist')
+const MODE = 'development'
+const enabledSourceMap = (MODE === 'development')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: MODE,
@@ -10,11 +12,11 @@ module.exports = {
     path.resolve(__dirname, 'src/index.js'),
   ],
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: distPath,
     filename: 'main.js',
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: distPath,
     open: true,
     port: 8080,
   },
@@ -58,5 +60,10 @@ module.exports = {
         use: [{ loader: 'babel-loader', },],
       },
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'index.html'),
+    })
+  ]
 };
