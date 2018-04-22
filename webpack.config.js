@@ -4,6 +4,7 @@ const enabledSourceMap = (MODE === 'development');
 
 module.exports = {
   mode: MODE,
+  devtool: 'source-map',
   entry: [
     'babel-polyfill',
     path.resolve(__dirname, 'src/index.js'),
@@ -20,7 +21,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css/, // 対象となるファイルの拡張子
+        test: /\.css/,
         use: [
           'style-loader',
           {
@@ -31,24 +32,30 @@ module.exports = {
               sourceMap: enabledSourceMap,
               importLoaders: 2,
             },
-            loader: 'sass-loder',
+          },
+          {
+            loader: 'postcss-loder',
             options: {
               sourceMap: enabledSourceMap,
-            }
+              plugins: [
+                require('autoprefixer')({grid: true})
+              ]
+            },
+          },
+          {
+            loader: 'sass-loder',
+            options: { sourceMap: enabledSourceMap, }
           },
         ],
       },
       {
+        test: /\.(gif|png|jpg|eot|wof|woff|woff2|ttf|svg)$/,
+        loader: 'url-loader',
+      },
+      {
         test: /\.js$/,
-        exclude: /node_modules/, // 除外するディレクトリ
-        use: [
-          {
-            loader: 'babel-loader',
-            // options: {
-            //   presets: ['env', {'modules': false}], // {modules: false}にしないと import 文が Babel によって CommonJS に変換され、webpack の Tree Shaking 機能が使えない
-            // },
-          },
-        ],
+        exclude: /node_modules/,
+        use: [{ loader: 'babel-loader', },],
       },
     ]
   }
