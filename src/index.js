@@ -1,2 +1,3 @@
 import 'babel-polyfill'
-import './style.scss'
+import './scss/reset.scss'
+import './scss/style.scss'
