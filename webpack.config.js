@@ -1,7 +1,9 @@
 const path = require('path')
+const MODE = 'development';
+const enabledSourceMap = (MODE === 'development');
 
 module.exports = {
-  mode: 'development',
+  mode: MODE,
   entry: [
     'babel-polyfill',
     path.resolve(__dirname, 'src/index.js'),
@@ -26,8 +28,13 @@ module.exports = {
             options: {
               url: false, // オプションでCSS内のurl()メソッドの取り込みを禁止する
               minimize: true, // CSSの空白文字を削除する
-              sourceMap: true, // ソースマップを有効にする
+              sourceMap: enabledSourceMap,
+              importLoaders: 2,
             },
+            loader: 'sass-loder',
+            options: {
+              sourceMap: enabledSourceMap,
+            }
           },
         ],
       },
