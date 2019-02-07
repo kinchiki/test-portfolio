@@ -1,0 +1,25 @@
+body {
+  background-color: #e8e8e8;
+}
+
+section {
+  margin: 60px;
+}
+
+// header
+.header-list {
+  display: flex;
+  .item {
+    padding: 20px;
+  }
+}
+
+// link-collection
+.link-list {
+  display: flex;
+}
+
+// technology
+.tech-list {
+  display: flex;
+}
